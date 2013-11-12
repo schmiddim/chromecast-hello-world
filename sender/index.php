@@ -1,4 +1,7 @@
+<?php	require_once '../config.php';?>
 <html data-cast-api-enabled="true">
+<!-- localhost/chromecast -->
+<!-- https://github.com/schmiddim/chromecast-hello-world -->
 	<head>
 		<title>Hello World Chrome Sender</title>
 		<link rel="stylesheet" type="text/css" href="../css/sender.css" />
@@ -33,7 +36,7 @@
 		initializeApi = function() {
 			if (!cast_api) {
 				cast_api = new cast.Api();
-				cast_api.addReceiverListener('*** YOUR APP ID HERE ***', onReceiverList);
+				cast_api.addReceiverListener('<?php echo CHROME_CAST_APP_ID;?>', onReceiverList);
 			}
 		};
 
@@ -62,7 +65,7 @@
 
 		doLaunch = function(receiver) {
 			if (!cv_activity) {
-				var request = new cast.LaunchRequest('*** YOUR APP ID HERE ***', receiver);
+				var request = new cast.LaunchRequest('<?php echo CHROME_CAST_APP_ID;?>', receiver);
 
 				$killSwitch.prop('disabled', false);
 
@@ -74,7 +77,7 @@
 			if (activity.status === 'running') {
 				cv_activity = activity;
 				
-				cast_api.sendMessage(cv_activity.activityId, '*** YOUR NAMESPACE HERE ***', {type: 'HelloWorld'});
+				cast_api.sendMessage(cv_activity.activityId, '<?php echo CHROME_CAST_NAMESPACE;?>', {type: 'HelloWorld'});
 			}
 		};
 

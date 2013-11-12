@@ -1,3 +1,4 @@
+<?php	require_once '../config.php';?>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/receiver.css" />
@@ -11,13 +12,13 @@
 <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
 <script>
 	$(function() {
-		var receiver = new cast.receiver.Receiver('*** YOUR APP ID ****', ['*** YOUR NAMESPACE ***']),
-			channelHandler = new cast.receiver.ChannelHandler('*** YOUR NAMESPACE ***'),
+		var receiver = new cast.receiver.Receiver('<?php echo CHROME_CAST_APP_ID;?>', ['<?php echo CHROME_CAST_NAMESPACE;?>']),
+			channelHandler = new cast.receiver.ChannelHandler('<?php echo CHROME_CAST_APP_ID;?>'),
 			$messages = $('.messages'),
 			$body = $('body');
 		
 		channelHandler.addChannelFactory(
-			receiver.createChannelFactory('*** YOUR NAMESPACE ***'));
+			receiver.createChannelFactory('<?php echo CHROME_CAST_NAMESPACE;?>'));
 
 		receiver.start();
 
